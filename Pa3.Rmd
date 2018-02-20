@@ -1,0 +1,50 @@
+---
+title: "Pa3"
+author: "Esther Hur"
+date: "February 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Pa3
+##Loading data 
+
+```{r, my_setup, echo=FALSE, message=FALSE}
+library(tidyverse)
+data(package = "languageR")
+library(languageR)
+str(danish)
+```
+
+##Tidy some data
+Tidy the dataset (every variable gets a column, every observation occupies a single row), if necessary.
+
+```{r, my_setup, echo=FALSE, message=FALSE}
+my_datas <- danish %>%
+  select(., x = LogRT, y = PC1)
+```
+
+## Generate a plot that includes a regression line
+Select two continuous variables and fit a model to the data (bivariate regression).
+
+```{r, my_setup, echo=FALSE, message=FALSE}
+my_datas  %>%
+  ggplot(., aes(x= x , y = y )) +
+  geom_point() +
+  geom_smooth(method = 'lm')
+```
+
+## Write up some general observations
+
+```{r, my_setup, echo=FALSE, message=FALSE}
+my_fit <- lm (y ~ x, data = my_datas)
+summary(my_fit)
+```
+
+
+
+
+
